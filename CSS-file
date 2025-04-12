@@ -1,0 +1,45 @@
+
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+h3 {
+    text-align: center;
+}
+.box{
+    display: flex;
+    justify-content: center;
+    
+    
+}
+
+.box1 {
+    height: 100px;
+    width: 100px;
+    border: 10px solid black;
+    border-radius: 20%;
+    margin: 1rem;
+    padding: 20px;
+    
+}
+
+.pink {
+    background-color: #d44c72;
+}
+.orange {
+    background-color: #F28C34;
+}
+.blue {
+    background-color: #4d91a5;
+}
+
+.skyblue {
+    background-color: #788DF2;
+}
+
+.flash{
+    background-color: white;
+}
