@@ -1,0 +1,80 @@
+let gameSeq = [];
+let userSeq = [];
+
+let started = false;
+let level = 0;
+
+let btns = ["pink", "orange", "blue", "skyblue"];
+
+let h2 = document.querySelector("h2");
+let h3 = document.querySelector("h3");
+
+document.addEventListener("keypress", function(){   // This is starting of the game 
+      if(started == false){ 
+            console.log("game started");
+            started = true;
+
+            levelUp();
+      }
+});
+
+function btnFlash(btn) {    // to flash the button 
+      btn.classList.add("flash");
+      setTimeout(function (){
+            btn.classList.remove("flash")
+      },250)
+}
+
+function levelUp (){
+      userSeq = []; // it will empty the user sequence
+      level++;
+      h2.innerText = `Level ${level}`;
+
+     // game choose the random button
+      let randIdx = Math.floor(Math.random() *3 );
+      let randColor = btns[randIdx];
+      let randBtn = document.querySelector(`.${randColor}`); //accessing each button by matching class of it 
+      gameSeq.push(randColor); // adding color to game sequence
+      console.log(gameSeq);
+      btnFlash(randBtn);
+
+}
+
+function checkAns(idx){   // this function check the sqeunece 
+      if(gameSeq[idx] === userSeq[idx]){
+        if(gameSeq.length == userSeq.length){  // it check the length and execute the level up function
+            setTimeout(levelUp,1000); 
+        }
+      } else{
+            h2.innerHTML = `Game over! Youe score was <b>${level}</b> <br> press any key to start the game`;
+            h3.innerHTML = `Your high score was <b>${level}</b>`
+            document.querySelector("body").style.backgroundColor = "red";
+            setTimeout(function (){
+                  document.querySelector("body").style.backgroundColor = "white";
+            },150);
+            reset();
+      }
+}
+
+function btnPress (){  // applying the function to press on individual button
+      let btn = this;
+      btnFlash(btn);
+
+      userColor = btn.getAttribute("id");
+      userSeq.push(userColor); // adding color to user  sequence
+
+      checkAns(userSeq.length-1);
+}
+
+
+let allBtn = document.querySelectorAll(".box1"); //Accessing the all button and apply the eventlistener individually
+for(btn of allBtn){
+      btn.addEventListener("click", btnPress);
+};
+
+function reset (){   // reset function that will reset the all the values.
+      userSeq = [];
+      gameSeq = [];
+      started = false;
+      level = 0; 
+}
